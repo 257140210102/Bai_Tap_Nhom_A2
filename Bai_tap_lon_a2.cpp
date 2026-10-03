@@ -11,6 +11,7 @@ class MonHoc{
 		string Phong_Thi; // phong thi
 		int So_Sinh_Vien; // so luong sinh vien dang ky
 	public:
+	    // ham tao
 		MonHoc() {
 			Ma_Mon = "";
 			Ten_Mon = "";
@@ -19,17 +20,9 @@ class MonHoc{
 			Ca_Thi = 0;
 			Phong_Thi = "";
 			So_Sinh_Vien = 0;
-		}; // ham tao
-		MonHoc(string ma, string ten, int tc, string ngay, int ca, string phong, int soluong){ // ham tao co tham so
-			Ma_Mon = ma;
-			Ten_Mon = ten;
-			So_Tin = tc;
-			Ngay_Thi = ngay;
-			Ca_Thi = ca;
-			Phong_Thi = phong;
-			So_Sinh_Vien = soluong;
-    	}
-	    MonHoc(const MonHoc &mh) { // ham sao chep
+		}; 
+		//ham sao chep
+	    MonHoc(const MonHoc &mh) { 
 	        Ma_Mon = mh.Ma_Mon;
 			Ten_Mon = mh.Ten_Mon;
 			So_Tin = mh.So_Tin;
@@ -40,14 +33,14 @@ class MonHoc{
 	    }
 		void nhap(); // phuong thuc nhap
 		void xuat() const; // phuong thuc xuat
-		friend void nhap_ds(MonHoc ds[], int &n);
-        friend void xuat_ds(const MonHoc ds[], int n);
-        friend int so_sanh_theo_ngay(const MonHoc &a, const MonHoc &b);
-        friend void sap_xep(MonHoc ds[], int n);
-        friend void tim_ten_mon(const MonHoc ds[], int n, string ten_mon);
-        friend void tim_ma_mon(const MonHoc ds[], int n, string ma_mon);
-        friend void bo_sung(MonHoc ds[], int &n, int vi_tri,const MonHoc &a);
-        friend void xoa(MonHoc ds[], int &n, int vi_tri);
+		friend void nhap_ds(MonHoc ds[], int &n); // ham ban nhap danh sach
+        friend void xuat_ds(const MonHoc ds[], int n); //ham ban in danh sach
+        friend int so_sanh_theo_ngay(const MonHoc &a, const MonHoc &b); // so sanh theo ngay
+        friend void sap_xep(MonHoc ds[], int n); // ham ban sap xep
+        friend void tim_ten_mon(const MonHoc ds[], int n, string ten_mon); // ham ban tim theo ten mon
+        friend void tim_ma_mon(const MonHoc ds[], int n, string ma_mon); // ham ban tim theo ma mon
+        friend void bo_sung(MonHoc ds[], int &n, int vi_tri,const MonHoc &a); // ham bo sung
+        friend void xoa(MonHoc ds[], int &n, int vi_tri);// ham xoa
 };
 
 // Nhap 1 mon hoc
@@ -68,7 +61,6 @@ void MonHoc::nhap(){
 	cout << "Nhap so luong sinh vien dang ky: ";
 	cin >> So_Sinh_Vien;
 }
-
 // Xuat 1 mon hoc
 void MonHoc::xuat() const{
            cout << left
@@ -83,17 +75,16 @@ void MonHoc::xuat() const{
 }
 // so sanh 2 ngay thi cua 2 mon hoc
 int so_sanh_theo_ngay(const MonHoc &a, const MonHoc &b){
-    string nam_thang_ngay_a, nam_thang_ngay_b;
-    // Chuyen ngay thi sang dinh dang YYYYMMDD de so sanh
+    string nam_thang_ngay_a, nam_thang_ngay_b;// Chuyen ngay thi sang dinh dang YYYYMMDD de so sanh
     nam_thang_ngay_a = a.Ngay_Thi.substr(6, 4) + a.Ngay_Thi.substr(3, 2) + a.Ngay_Thi.substr(0, 2);
     nam_thang_ngay_b = b.Ngay_Thi.substr(6, 4) + b.Ngay_Thi.substr(3, 2) + b.Ngay_Thi.substr(0, 2);
     if(nam_thang_ngay_a < nam_thang_ngay_b)
         return -1; // neu ngay thi cua mon a nho hon ngay thi cua mon b thi tra ve -1
-    else if(nam_thang_ngay_a > nam_thang_ngay_b)
+    if(nam_thang_ngay_a > nam_thang_ngay_b)
         return 1; // neu ngay thi cua mon a lon hon ngay thi cua mon b thi tra ve 1
-    else
-        return 0; // neu ngay thi cua mon a bang ngay thi cua mon b thi tra ve 0
+    return 0; // neu ngay thi cua mon a bang ngay thi cua mon b thi tra ve 0
 }
+// ham ban nhap danh sach
 void nhap_ds(MonHoc ds[], int &n){
 	do{
 		cout << "Nhap so luong mon hoc n (0 < n < 200): ";
@@ -105,6 +96,7 @@ void nhap_ds(MonHoc ds[], int &n){
 		ds[i].nhap();
 	}
 }
+// ham in tieu de
 void xuat_tieu_de(){
     cout << left
          << setw(12) << "Ma mon"
@@ -183,6 +175,7 @@ void bo_sung(MonHoc ds[], int &n, int vi_tri, const MonHoc &a) {
     cout<< "danh sach sau khi bo sung tai vi tri " << vi_tri << ":\n";
     xuat_ds(ds, n);
 }
+// xoa mon hoc tai vi tri
 void xoa(MonHoc ds[], int &n, int vi_tri) {
      // xoa mon hoc tai vi tri vi_tri
     if (n == 0) { // kiem tra danh sach co rong hay khong
@@ -194,8 +187,7 @@ void xoa(MonHoc ds[], int &n, int vi_tri) {
         cout << "Vi tri khong hop le!\n";
         return;
     }
-    // dich chuyen cac mon hoc tu vi tri vi_tri+1
-    // tro ve truoc 1 vi tri de xoa mon hoc tai vi tri vi_tri
+    // dich chuyen cac mon hoc tu vi tri vi_tri+1 tro ve truoc 1 vi tri de xoa mon hoc tai vi tri vi_tri
     for (int i = vi_tri; i < n - 1; i++)
         ds[i] = ds[i + 1];
     n--; // giam so luong mon hoc trong danh sach
