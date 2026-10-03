@@ -11,8 +11,7 @@ class MonHoc{
 		string Phong_Thi; // phong thi
 		int So_Sinh_Vien; // so luong sinh vien dang ky
 	public:
-	    // ham tao
-		MonHoc() {
+		MonHoc() { // ham tao
 			Ma_Mon = "";
 			Ten_Mon = "";
 			So_Tin = 0;
@@ -20,8 +19,7 @@ class MonHoc{
 			Ca_Thi = 0;
 			Phong_Thi = "";
 			So_Sinh_Vien = 0;
-		};
-		//ham sao chep
+		}; //ham sao chep
 	    MonHoc(const MonHoc &mh) {
 	        Ma_Mon = mh.Ma_Mon;
 			Ten_Mon = mh.Ten_Mon;
@@ -31,6 +29,8 @@ class MonHoc{
 			Phong_Thi = mh.Phong_Thi;
 			So_Sinh_Vien = mh.So_Sinh_Vien;
 	    }
+	    ~MonHoc(){ //ham huy
+	    };
 		void nhap(); // phuong thuc nhap
 		void xuat() const; // phuong thuc xuat
 		friend void nhap_ds(MonHoc ds[], int &n); // ham ban nhap danh sach
