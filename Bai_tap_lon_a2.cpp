@@ -154,7 +154,8 @@ void tim_ma_mon(const MonHoc ds[], int n, string ma_mon){
 		}	}
 	if(!check){ // kiem tra neu khong tim thay mon hoc thi in ra thong bao
 		cout << "Khong tim thay mon hoc voi ma: " << ma_mon << endl;
-	}}
+	}
+}
 // Bo sung mon hoc a vao danh sach mon hoc tai vi tri vi_tri
 void bo_sung(MonHoc ds[], int &n, int vi_tri, const MonHoc &a) {
     if (n >= 200) { // kiem tra danh sach da day hay chua
