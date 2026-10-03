@@ -30,9 +30,7 @@ class MonHoc{
 			So_Sinh_Vien = 0;
 		}; // ham tao
 		MonHoc(string ma, string ten, int tc, string ngay, int ca, string phong, int soluong){ // ham tao co tham so
-			Ma_Mon = ma;
-			Ten_Mon = ten;
-			So_Tin = tc;
+			Ma_Mon = ma;Ten_Mon = ten; So_Tin = tc;
 			Ngay_Thi = ngay;
 			Ca_Thi = ca;
 			Phong_Thi = phong;
@@ -88,11 +86,9 @@ int so_sanh_theo_ngay(const MonHoc &a, const MonHoc &b){
     string nam_thang_ngay_a, nam_thang_ngay_b;
     // Chuyen ngay thi sang dinh dang YYYYMMDD de so sanh
     nam_thang_ngay_a = a.getNgayThi().substr(6,4)
-                        + a.getNgayThi().substr(3,2)
-                        + a.getNgayThi().substr(0,2);
+                        + a.getNgayThi().substr(3,2)+ a.getNgayThi().substr(0,2);
     nam_thang_ngay_b = b.getNgayThi().substr(6,4)
-                        + b.getNgayThi().substr(3,2)
-                        + b.getNgayThi().substr(0,2);
+                        + b.getNgayThi().substr(3,2)+ b.getNgayThi().substr(0,2);
     if(nam_thang_ngay_a < nam_thang_ngay_b)
         return -1; // neu ngay thi cua mon a nho hon ngay thi cua mon b thi tra ve -1
     else if(nam_thang_ngay_a > nam_thang_ngay_b)
@@ -126,22 +122,23 @@ void QuanLyDanhSach::nhap_ds(){
 		ds[i].nhap();
 	}
 }
-
+void xuat_tieu_de(){
+    cout << left
+         << setw(12) << "Ma mon"
+         << setw(30) << "Ten mon"
+         << setw(10) << "So TC"
+         << setw(15) << "Ngay thi"
+         << setw(10) << "Ca thi"
+         << setw(15) << "Phong thi"
+         << setw(12) << "So SV"
+         << endl;
+}
 // Xuat danh sach mon hoc
 void QuanLyDanhSach::xuat_ds(){
 	cout << "\nDanh sach mon hoc \n";
-           cout << left
-                << setw(12) << "Ma mon"
-                << setw(30) << "Ten mon"
-                << setw(10) << "So TC"
-                << setw(15) << "Ngay thi"
-                << setw(10) << "Ca thi"
-                << setw(15) << "Phong thi"
-                << setw(12) << "So SV"
-                << endl;
-          for(int i = 0; i < n; i++){
-                    ds[i].xuat();
-          }
+	xuat_tieu_de();
+    for(int i = 0; i < n; i++)
+        ds[i].xuat();
 }
 // sap xep danh sach mon hoc theo ngay thi tang dan
 void QuanLyDanhSach::sap_xep(){
@@ -161,26 +158,15 @@ void QuanLyDanhSach::tim_ten_mon(){
 	cout << "Nhap ten mon hoc can tim: ";
 	cin.ignore();
 	getline(cin, ten_mon);
-	bool found = false;
-	int c=0;
+	int check=0;
 	for(int i=0; i<n; i++){
 		if(ds[i].getTenMon() == ten_mon){
-			if((++c)==1){ // neu tim thay mon hoc dau tien thi in ra tieu de
-				cout << left
-                << setw(12) << "Ma mon"
-                << setw(30) << "Ten mon"
-                << setw(10) << "So TC"
-                << setw(15) << "Ngay thi"
-                << setw(10) << "Ca thi"
-                << setw(15) << "Phong thi"
-                << setw(12) << "So SV"
-                << endl;
-			}
+			if((++check)==1) // neu tim thay mon hoc dau tien thi in ra tieu de
+				xuat_tieu_de();
 			ds[i].xuat(); // in ra mon hoc tim thay
-			found = true; // danh dau da tim thay mon hoc
 		}
-	}
-	if(!found){ // kiem tra neu khong tim thay mon hoc thi in ra thong bao
+    }
+	if(!check){ // kiem tra neu khong tim thay mon hoc thi in ra thong bao
 		cout << "Khong tim thay mon hoc voi ten: " << ten_mon << endl;
 	}
 }
@@ -189,40 +175,29 @@ void QuanLyDanhSach::tim_ma_mon(){
 	string ma_mon;
 	cout << "Nhap ma mon hoc can tim: ";
 	cin >> ma_mon;
-	bool found = false;
-	int c=0;
+	int check=0;
 	for(int i=0; i<n; i++){
 		if(ds[i].getMaMon() == ma_mon){
-			if((++c)==1){ // neu tim thay mon hoc dau tien thi in ra tieu de
-				cout << left
-                << setw(12) << "Ma mon"
-                << setw(30) << "Ten mon"
-                << setw(10) << "So TC"
-                << setw(15) << "Ngay thi"
-                << setw(10) << "Ca thi"
-                << setw(15) << "Phong thi"
-                << setw(12) << "So SV"
-                << endl;
-			}
+			if((++check)==1) // neu tim thay mon hoc dau tien thi in ra tieu de
+				xuat_tieu_de();
 			ds[i].xuat(); // in ra mon hoc tim thay
-			found = true; // danh dau da tim thay mon hoc
-		}
-	}
-	if(!found){ // kiem tra neu khong tim thay mon hoc thi in ra thong bao
+		}	}
+	if(!check){ // kiem tra neu khong tim thay mon hoc thi in ra thong bao
 		cout << "Khong tim thay mon hoc voi ma: " << ma_mon << endl;
-	}
-}
+	}}
 // Bo sung mon hoc a vao danh sach mon hoc tai vi tri vi_tri
 void QuanLyDanhSach::bo_sung(int vi_tri, MonHoc a) {
     if (n >= 200) { // kiem tra danh sach da day hay chua
         cout << "Danh sach da day, khong the bo sung!\n";
         return;
     }
-    if (vi_tri < 0 || vi_tri > n) {// kiem tra vi tri bo sung co hop le hay khong
+    if (vi_tri < 0 || vi_tri > n) {
+            // kiem tra vi tri bo sung co hop le hay khong
         cout << "Vi tri khong hop le!\n";
         return;
     }
-    // dich chuyen cac mon hoc tu vi tri vi_tri tro ve sau 1 vi tri de tao cho mon hoc moi
+    // dich chuyen cac mon hoc tu vi tri vi_tri
+    //tro ve sau 1 vi tri de tao cho mon hoc moi
     for (int i = n; i > vi_tri; i--)
         ds[i] = ds[i - 1];
     ds[vi_tri] = a; // bo sung mon hoc moi vao vi tri vi_tri
@@ -230,16 +205,19 @@ void QuanLyDanhSach::bo_sung(int vi_tri, MonHoc a) {
     cout<< "danh sach sau khi bo sung tai vi tri " << vi_tri << ":\n";
     xuat_ds();
 }
-void QuanLyDanhSach::xoa(int vi_tri) { // xoa mon hoc tai vi tri vi_tri
+void QuanLyDanhSach::xoa(int vi_tri) {
+     // xoa mon hoc tai vi tri vi_tri
     if (n == 0) { // kiem tra danh sach co rong hay khong
         cout << "Danh sach rong, khong the xoa!\n";
         return;
     }
-    if (vi_tri < 0 || vi_tri >= n) { // kiem tra vi tri xoa co hop le hay khong
+    if (vi_tri < 0 || vi_tri >= n) {
+            // kiem tra vi tri xoa co hop le hay khong
         cout << "Vi tri khong hop le!\n";
         return;
     }
-    // dich chuyen cac mon hoc tu vi tri vi_tri+1 tro ve truoc 1 vi tri de xoa mon hoc tai vi tri vi_tri
+    // dich chuyen cac mon hoc tu vi tri vi_tri+1
+    // tro ve truoc 1 vi tri de xoa mon hoc tai vi tri vi_tri
     for (int i = vi_tri; i < n - 1; i++)
         ds[i] = ds[i + 1];
     n--; // giam so luong mon hoc trong danh sach
@@ -271,24 +249,18 @@ int main(){
 				ql.xuat_ds();
 				break;
 			case 3: // tim mon hoc theo ten
-				ql.tim_ten_mon();
-				break;
+				ql.tim_ten_mon();break;
 			case 4: // tim mon hoc theo ma
-				ql.tim_ma_mon();
-				break;
+				ql.tim_ma_mon();break;
 			case 5:{ // bo sung mon hoc vao danh sach
 				int vi_tri;
-				cout << "Nhap vi tri can bo sung: ";
-				cin >> vi_tri;
-				MonHoc a;
-				a.nhap();
-				ql.bo_sung(vi_tri, a);
+				cout << "Nhap vi tri can bo sung: ";cin >> vi_tri;
+				MonHoc a;a.nhap(); ql.bo_sung(vi_tri, a);
 				break;
 			}
 			case 6:{ // xoa mon hoc khoi danh sach
 				int vi_tri;
-				cout << "Nhap vi tri can xoa: ";
-				cin >> vi_tri;
+				cout << "Nhap vi tri can xoa: ";cin >> vi_tri;
 				ql.xoa(vi_tri);
 				break;
 			}
