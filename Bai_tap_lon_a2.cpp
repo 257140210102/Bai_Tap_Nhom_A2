@@ -30,7 +30,9 @@ class MonHoc{
 			So_Sinh_Vien = 0;
 		}; // ham tao
 		MonHoc(string ma, string ten, int tc, string ngay, int ca, string phong, int soluong){ // ham tao co tham so
-			Ma_Mon = ma;Ten_Mon = ten; So_Tin = tc;
+			Ma_Mon = ma;
+			Ten_Mon = ten;
+			So_Tin = tc;
 			Ngay_Thi = ngay;
 			Ca_Thi = ca;
 			Phong_Thi = phong;
@@ -86,9 +88,11 @@ int so_sanh_theo_ngay(const MonHoc &a, const MonHoc &b){
     string nam_thang_ngay_a, nam_thang_ngay_b;
     // Chuyen ngay thi sang dinh dang YYYYMMDD de so sanh
     nam_thang_ngay_a = a.getNgayThi().substr(6,4)
-                        + a.getNgayThi().substr(3,2)+ a.getNgayThi().substr(0,2);
+                     + a.getNgayThi().substr(3,2)
+                     + a.getNgayThi().substr(0,2);
     nam_thang_ngay_b = b.getNgayThi().substr(6,4)
-                        + b.getNgayThi().substr(3,2)+ b.getNgayThi().substr(0,2);
+                     + b.getNgayThi().substr(3,2)
+                     + b.getNgayThi().substr(0,2);
     if(nam_thang_ngay_a < nam_thang_ngay_b)
         return -1; // neu ngay thi cua mon a nho hon ngay thi cua mon b thi tra ve -1
     else if(nam_thang_ngay_a > nam_thang_ngay_b)
@@ -96,8 +100,7 @@ int so_sanh_theo_ngay(const MonHoc &a, const MonHoc &b){
     else
         return 0; // neu ngay thi cua mon a bang ngay thi cua mon b thi tra ve 0
 }
-// QuanLyDanhSach la lop quan ly danh sach mon hoc
-class QuanLyDanhSach{
+class QuanLyDanhSach{ // QuanLyDanhSach la lop quan ly danh sach mon hoc
 	private:
 		MonHoc ds[200];
 		int n;
@@ -245,22 +248,27 @@ int main(){
 				break;
 			case 2: // sap xep danh sach mon hoc theo ngay thi
 				ql.sap_xep();
-				cout << "Danh sach da duoc sap xep theo ngay thi." << endl;
+				cout << "Danh sach da duoc sap xep theo ngay thi.\n";
 				ql.xuat_ds();
 				break;
 			case 3: // tim mon hoc theo ten
-				ql.tim_ten_mon();break;
+				ql.tim_ten_mon();
+				break;
 			case 4: // tim mon hoc theo ma
-				ql.tim_ma_mon();break;
+				ql.tim_ma_mon();
+				break;
 			case 5:{ // bo sung mon hoc vao danh sach
 				int vi_tri;
-				cout << "Nhap vi tri can bo sung: ";cin >> vi_tri;
-				MonHoc a;a.nhap(); ql.bo_sung(vi_tri, a);
+				cout << "Nhap vi tri can bo sung: ";
+				cin >> vi_tri;
+				MonHoc a;a.nhap();
+				ql.bo_sung(vi_tri, a);
 				break;
 			}
 			case 6:{ // xoa mon hoc khoi danh sach
 				int vi_tri;
-				cout << "Nhap vi tri can xoa: ";cin >> vi_tri;
+				cout << "Nhap vi tri can xoa: ";
+				cin >> vi_tri;
 				ql.xoa(vi_tri);
 				break;
 			}
