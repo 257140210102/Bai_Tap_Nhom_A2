@@ -20,9 +20,9 @@ class MonHoc{
 			Ca_Thi = 0;
 			Phong_Thi = "";
 			So_Sinh_Vien = 0;
-		}; 
+		};
 		//ham sao chep
-	    MonHoc(const MonHoc &mh) { 
+	    MonHoc(const MonHoc &mh) {
 	        Ma_Mon = mh.Ma_Mon;
 			Ten_Mon = mh.Ten_Mon;
 			So_Tin = mh.So_Tin;
@@ -73,17 +73,6 @@ void MonHoc::xuat() const{
                 << setw(12) << So_Sinh_Vien
                 << endl;
 }
-// so sanh 2 ngay thi cua 2 mon hoc
-int so_sanh_theo_ngay(const MonHoc &a, const MonHoc &b){
-    string nam_thang_ngay_a, nam_thang_ngay_b;// Chuyen ngay thi sang dinh dang YYYYMMDD de so sanh
-    nam_thang_ngay_a = a.Ngay_Thi.substr(6, 4) + a.Ngay_Thi.substr(3, 2) + a.Ngay_Thi.substr(0, 2);
-    nam_thang_ngay_b = b.Ngay_Thi.substr(6, 4) + b.Ngay_Thi.substr(3, 2) + b.Ngay_Thi.substr(0, 2);
-    if(nam_thang_ngay_a < nam_thang_ngay_b)
-        return -1; // neu ngay thi cua mon a nho hon ngay thi cua mon b thi tra ve -1
-    if(nam_thang_ngay_a > nam_thang_ngay_b)
-        return 1; // neu ngay thi cua mon a lon hon ngay thi cua mon b thi tra ve 1
-    return 0; // neu ngay thi cua mon a bang ngay thi cua mon b thi tra ve 0
-}
 // ham ban nhap danh sach
 void nhap_ds(MonHoc ds[], int &n){
 	do{
@@ -114,6 +103,17 @@ void xuat_ds(const MonHoc ds[], int n){
 	xuat_tieu_de();
     for(int i = 0; i < n; i++)
         ds[i].xuat();
+}
+// so sanh 2 ngay thi cua 2 mon hoc
+int so_sanh_theo_ngay(const MonHoc &a, const MonHoc &b){
+    string nam_thang_ngay_a, nam_thang_ngay_b;// Chuyen ngay thi sang dinh dang YYYYMMDD de so sanh
+    nam_thang_ngay_a = a.Ngay_Thi.substr(6, 4) + a.Ngay_Thi.substr(3, 2) + a.Ngay_Thi.substr(0, 2);
+    nam_thang_ngay_b = b.Ngay_Thi.substr(6, 4) + b.Ngay_Thi.substr(3, 2) + b.Ngay_Thi.substr(0, 2);
+    if(nam_thang_ngay_a < nam_thang_ngay_b)
+        return -1; // neu ngay thi cua mon a nho hon ngay thi cua mon b thi tra ve -1
+    if(nam_thang_ngay_a > nam_thang_ngay_b)
+        return 1; // neu ngay thi cua mon a lon hon ngay thi cua mon b thi tra ve 1
+    return 0; // neu ngay thi cua mon a bang ngay thi cua mon b thi tra ve 0
 }
 // sap xep danh sach mon hoc theo ngay thi tang dan
 void sap_xep(MonHoc ds[], int n){
